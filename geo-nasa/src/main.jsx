@@ -26,6 +26,6 @@ const viewer = new Cesium.Viewer('cesium', {
 var skyAtmosphere = viewer.scene.skyAtmosphere;
 var skyCheckbox = document.getElementById('skyCheckbox');
 
-skyCheckbox.addEventListener('change', function() {
-  viewer.scene.skyAtmosphere = skyCheckbox.checked ? skyAtmosphere : undefined;
-}, false);
+// skyCheckbox.addEventListener('change', function() {
+//   viewer.scene.skyAtmosphere = skyCheckbox.checked ? skyAtmosphere : undefined;
+// }, false);

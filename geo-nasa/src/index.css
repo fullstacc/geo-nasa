@@ -37,12 +37,25 @@ code {
   border: 3px solid green; 
 }
 
-#root {
+
+/*styling root here affects the components within it*/
+.controlPanel {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 50%;
+  left: 50%;
   background: rgba(42, 42, 42, 0.8);
-  padding: 5px 8px;
+  transform: translate(-50%, -50%);
+  padding: 5px 8px 5px 5px;
+  padding-bottom: 20px;
   border-radius: 5px;
   border: 3px solid green; 
+}
+
+#banner {
+  color: white
+}
+
+.banner-button {
+ position: relative;
+ left:50%;
 }

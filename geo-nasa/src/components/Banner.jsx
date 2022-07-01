@@ -1,12 +1,22 @@
-import {  Entity, EntityDescription } from "resium";
-import { InfoBox } from "cesium"
+// import {  Entity, EntityDescription } from "resium";
 import './Banner.css';
+import { useState } from 'react';
+
+// const [showBanner, setShowBanner] = useState(true)
 
 
 
-const Banner = () => {
-    return (<div className="controlPanel"> THIS IS A DIV LOL
-    </div>)
+const Banner = ({bannerVisible, closeBanner }) => {
+    if (bannerVisible) {
+        return (<div className="controlPanel" id="banner"> 
+        <h1>Welcome to GEO.</h1>
+        <p>From this app you'll be able to visualize various data feeds.</p>
+        <form onSubmit={closeBanner} ><button className="banner-button"type="submit">OK</button></form>
+        </div>)
+    }
+    
+
+
 }
 
 export default Banner
