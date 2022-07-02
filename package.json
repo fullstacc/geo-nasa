@@ -3,10 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "find-dependencies": "find-duplicate-dependencies"
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "dependencies": {
     "cesium": "^1.94.3",
