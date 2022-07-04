@@ -3,24 +3,12 @@
 // import { Viewer, Entity } from "resium";
 // import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 import Banner from "./components/Banner"
+import Toolbar from "./components/Toolbar";
 import { useState } from 'react';
 
 
-
-
-
-// setTimeout(
-//   () => setCounter(counter + 1),
-//   1000
-// )
-
-
-
-
-// When we use Cesium we initialize the Viewer object, but in cesium-react we can mount the Viewer component.
-
-
-
+// TODO: Separate into separate feed component
+const feedOptions = ['My Location']
 
 function App() {
   const [bannerVisible, setBannerVisible] = useState(true)
@@ -37,6 +25,7 @@ function App() {
   return (
   <div >
   <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
+  <Toolbar bannerVisible={bannerVisible} feedOptions={feedOptions}/>
   </div>
   )
 }
