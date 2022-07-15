@@ -1,5 +1,5 @@
 import { Viewer, Entity } from "resium";
-// import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
+import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 import Banner from "./components/Banner";
 import Toolbar from "./components/Toolbar";
 import { useState } from "react";
@@ -24,6 +24,11 @@ function App() {
       <Viewer full>
         <Toolbar bannerVisible={bannerVisible} feedOptions={feedOptions} />
         <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
+        <Entity
+    name="tokyo"
+    description="test"
+    position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
+  />
       </Viewer>
     </div>
   );
