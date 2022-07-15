@@ -4,7 +4,7 @@ import Banner from "./components/Banner";
 import Toolbar from "./components/Toolbar";
 import { useState } from "react";
 
-const feedOptions = ["My Location"];
+const feedOptions = ["My Location", "International Space Station"];
 
 function App() {
   const [bannerVisible, setBannerVisible] = useState(true);
@@ -13,8 +13,9 @@ function App() {
 
  
   // function to update list of displayed entities
-  const handleEntityList = (entity) => {
-    setEntityList(entity);
+  // the "status" here will come from the checkbox value
+  const handleEntityList = (entity, status) => {
+    status ? setEntityList([]) : setEntityList(entityList.concat(entity))
   }
 
   const closeBanner = (event) => {
@@ -22,23 +23,9 @@ function App() {
     if (bannerVisible) {
       setBannerVisible(false);
       event.preventDefault();
-      console.log('bannerVisible is now false')
     }
   };
 
-
-  // TODO: create an entitylist and allow resium to map and display multiple entities
-  // {entityList.map((x) => {
-  //   return (
-  //     <Entity
-  //       entity={x}
-  //       name="test1"
-  //       position={Cartesian3.fromDegrees(-74, 40, 100)}
-  //       point={{ pixelSize: 15, color: Color.YELLOW }}
-  //       description="Normal Description"
-  //     />
-  //   )
-  // })}
 
   return (
     <div>
@@ -46,12 +33,20 @@ function App() {
         <Toolbar bannerVisible={bannerVisible} feedOptions={feedOptions} handleEntityList={handleEntityList}/>
         <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
         <CustomDataSource>
-        <Entity
-        name="test1"
-        position={Cartesian3.fromDegrees(-74, 40, 100)}
+        {entityList.map((x, i) => {
+          const x_pos = x.position[0]
+          const y_pos = x.position[1]
+          const acc = x.accuracy
+    return (
+      <Entity
+        name={x.name}
+        key={i}
+        position={Cartesian3.fromDegrees(x_pos, y_pos, acc)}
         point={{ pixelSize: 15 }}
-        description="Normal Description"
+        description={x.description}
       />
+    )
+  })}
         </CustomDataSource>
       </Viewer>
     </div>

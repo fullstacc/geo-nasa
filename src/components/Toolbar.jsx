@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Checkbox } from './Checkbox';
 
     const Toolbar = ({bannerVisible, feedOptions, handleEntityList}) => {
     if (!bannerVisible) {
@@ -9,12 +10,8 @@ import { useState } from 'react';
             {feedOptions.map((option, i) => {
                 return (
                     <div key={i}>
-                        <input type="checkbox" id={option} name={option} onChange={handleEntityList}/>
-                        <label htmlFor={option}>{option}</label>
+                        < Checkbox name={option} handleEntityList={handleEntityList}/>
                     </div>
-                    // <div key={i}>
-                    //     < Checkbox name={option} updateEntities={updateEntities}/>
-                    // </div>
                 )
             })}
         </fieldset>

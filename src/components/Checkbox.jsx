@@ -1,48 +1,63 @@
 import React, {useState} from 'react'; 
-import {Cartesian3} from 'cesium'
-import {Entity, PointGraphics} from 'resium'
+import {useGeolocated} from "react-geolocated"
 
-function Checkbox({name, updateEntities}) { 
+function Checkbox({name, handleEntityList}) { 
   // state for checkbox
   const [checked, setChecked] = useState(false);
-  const [returnEntity, setReturnEntity]  = useState(null)
+  
 
-  function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        console.log("Geolocation is not supported by this browser.") 
-    }
+  function getLongAndLat() {
+    return new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+    );
 }
+
+const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+        useGeolocated({
+            positionOptions: {
+                enableHighAccuracy: false,
+            },
+            userDecisionTimeout: 5000,
+        });
+
+ const getLocation = () => {
+  
+
+    if (isGeolocationEnabled && isGeolocationAvailable) {
+      console.log('made it here  ' , coords.latitude)
+ 
+        const entityObject = {
+          name : name,
+          position: [coords.longitude, coords.latitude],
+          description: 'Your position',
+          accuracy: coords.accuracy
+        }
+        const status = checked
+        console.log('sending to entitylist, status is' , status)
+        handleEntityList(entityObject, status)
+    } else {
+        console.log("Geolocation is not supported by this browser.")
+    } 
+}
+
+
 function showPosition(position) {
     console.log("Latitude: " + position.coords.latitude + 
     "Longitude: " + position.coords.longitude)
-    const position2 = Cartesian3.fromDegrees(-74.0707383, 40.7117244, 100);
-    // this works; what we need is to return this data to resium viewer in order to render the position using an entity
-    setReturnEntity(<Entity position={position2}>
-      <PointGraphics pixelSize={10} />
-    </Entity>)
-    updateEntities(returnEntity)
+    const myPosition = [position.coords.latitude, position.coords.longitude]
+    return myPosition
 }
   
   const handleChange = () => { 
-    
-    setChecked(!checked);
-    console.log(`state for checkbox ${name} is now `,checked) 
-
-    if (checked) {
-        getLocation()
-    
-  }; 
-
+    setChecked(!checked)
+    getLocation()
 }
-  
-  return ( 
-    
-    <div>
-        <input type="checkbox" id={name} name={name} onChange={handleChange}/>
-        <label for={name}>{name}</label>
 
+ 
+  return ( 
+    <div>
+        <input type="checkbox" id={name} name={name} defaultChecked={checked} onChange={handleChange} />
+        <label htmlFor={name}>{name} </label>
     </div>
       
   ); 
