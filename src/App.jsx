@@ -13,8 +13,9 @@ function App() {
 
  
   // function to update list of displayed entities
-  const handleEntityList = (entity) => {
-    setEntityList(entity);
+  // the "status" here will come from the checkbox value
+  const handleEntityList = (entity, status) => {
+    status ? setEntityList([]) : setEntityList(entityList.concat(entity))
   }
 
   const closeBanner = (event) => {
@@ -22,7 +23,6 @@ function App() {
     if (bannerVisible) {
       setBannerVisible(false);
       event.preventDefault();
-      console.log('bannerVisible is now false')
     }
   };
 
