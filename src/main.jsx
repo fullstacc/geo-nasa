@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import * as Cesium from 'cesium';
+import { Viewer, Entity, PointGraphics} from "resium";
 import './index.css'
 
 
@@ -17,14 +18,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 
 
-const viewer = new Cesium.Viewer('cesium', {
-  timeline: false,
-  animation: false,
-  navigationHelpButton: false
-});   
-
-var skyAtmosphere = viewer.scene.skyAtmosphere;
-var skyCheckbox = document.getElementById('skyCheckbox');
+// const viewer = new Cesium.Viewer('cesium', {
+//   timeline: false,
+//   animation: false,
+//   navigationHelpButton: false
+// });   
 
 // skyCheckbox.addEventListener('change', function() {
 //   viewer.scene.skyAtmosphere = skyCheckbox.checked ? skyAtmosphere : undefined;
