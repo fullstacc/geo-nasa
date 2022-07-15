@@ -9,7 +9,7 @@ const Toolbar = ({bannerVisible, feedOptions}) => {
                 return (
                     <div key={i}>
                         <input type="checkbox" id={option} name={option}/>
-                        <label for={option}>{option}</label>
+                        <label htmlFor={option}>{option}</label>
 
                     </div>
                 )
