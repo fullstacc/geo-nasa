@@ -1,5 +1,6 @@
 import { useState } from 'react';
-const Toolbar = ({bannerVisible, feedOptions}) => {
+
+    const Toolbar = ({bannerVisible, feedOptions, handleEntityList}) => {
     if (!bannerVisible) {
         return (<div className="toolbar"> 
         <h3>Feed Options</h3>
@@ -8,10 +9,12 @@ const Toolbar = ({bannerVisible, feedOptions}) => {
             {feedOptions.map((option, i) => {
                 return (
                     <div key={i}>
-                        <input type="checkbox" id={option} name={option}/>
+                        <input type="checkbox" id={option} name={option} onChange={handleEntityList}/>
                         <label htmlFor={option}>{option}</label>
-
                     </div>
+                    // <div key={i}>
+                    //     < Checkbox name={option} updateEntities={updateEntities}/>
+                    // </div>
                 )
             })}
         </fieldset>
