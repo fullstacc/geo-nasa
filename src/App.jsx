@@ -3,6 +3,7 @@ import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 import Banner from "./components/Banner";
 import Toolbar from "./components/Toolbar";
 import { useState } from "react";
+console.log('DID IT WORK', import.meta.env)
 
 const feedOptions = ["My Location", "International Space Station"];
 

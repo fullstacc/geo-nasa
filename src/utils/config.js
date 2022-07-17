@@ -1,7 +1,6 @@
-require('dotenv').config()
 
-const NASA_KEY = process.env.NASA_KEY
+let NASA_KEY = process.env.NASA_KEY
 
 module.exports = {
-    NASA_KEY
+  NASA_KEY
 }
