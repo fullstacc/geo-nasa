@@ -15,7 +15,7 @@ const Apod = () => {
     }
 
     useEffect(() => {
-        dataFetcher(apod_url, handleApod, apod);
+        dataFetcher(apod_url, 'apod', handleApod, apod);
 
       }, []);
 

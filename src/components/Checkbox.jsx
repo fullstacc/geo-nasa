@@ -1,11 +1,14 @@
 import React, {useState} from 'react'; 
+import {dataFetcher} from '../utils/dataService'
 import {useGeolocated} from "react-geolocated"
 
+
+// TODO: refactor to ES6
 function Checkbox({name, handleEntityList}) { 
   // state for checkbox
   const [checked, setChecked] = useState(false);
   
-
+// TODO: refactor to ES6
   function getLongAndLat() {
     return new Promise((resolve, reject) =>
         navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -20,6 +23,8 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
             userDecisionTimeout: 5000,
         });
 
+
+ // TODO: refactor this to its own module
  const getLocation = () => {
   
 
@@ -31,7 +36,7 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
           description: 'Your position',
           accuracy: coords.accuracy
         }
-        const status = checked
+        let status = checked
         handleEntityList(entityObject, status)
     } else {
         console.log("Geolocation is not supported by this browser.")
@@ -53,9 +58,21 @@ function showPosition(position) {
       getLocation()
     }
     if (name === 'International Space Station') {
-      console.log(name)
+      handleISS()
+    
     }
     
+}
+
+const handleISS = () => {
+  // SET THE URL TO GO TO
+  let url = 'https://tle.ivanstanojevic.me/api/tle/25544'
+  // CALL DATAFETCHER WITH THE URL, STATEUPDATER, AND STATETSTATUS
+  dataFetcher(url, 'iss')
+  // CALL HANDLEENTITYLIST() AND UPDATE IT WITH THE ISS ENTITY OBJECT ATTRIBUTES
+  let status = checked
+  // handleEntityList(entityObject, status)
+
 }
 
  
