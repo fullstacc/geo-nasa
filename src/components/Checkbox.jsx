@@ -24,7 +24,6 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
   
 
     if (isGeolocationEnabled && isGeolocationAvailable) {
-      console.log('made it here  ' , coords.latitude)
  
         const entityObject = {
           name : name,
@@ -33,7 +32,6 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
           accuracy: coords.accuracy
         }
         const status = checked
-        console.log('sending to entitylist, status is' , status)
         handleEntityList(entityObject, status)
     } else {
         console.log("Geolocation is not supported by this browser.")
@@ -48,9 +46,16 @@ function showPosition(position) {
     return myPosition
 }
   
+// handleChange() will function differently depending on the checkbox set (see "name")
   const handleChange = () => { 
     setChecked(!checked)
-    getLocation()
+    if (name === 'My Location') {
+      getLocation()
+    }
+    if (name === 'International Space Station') {
+      console.log(name)
+    }
+    
 }
 
  
