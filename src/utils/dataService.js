@@ -24,6 +24,23 @@ const dataFetcher = (name, Url, stateUpdater, stateStatus) => {
         .catch((e) => console.log(e))
     }
 
+    if (name === 'iss') {
+        let targetUrl = Url
+
+        axios.get(targetUrl).then((response) => {
+            let responseObject = {
+                name: 'International Space Station',
+                line1: response.data.line1,
+                line2: response.data.line2,
+                date: response.data.date,
+                name: response.data.name,
+                satelliteId: response.data.satelliteId,
+                description: 'International Space Station'
+            }
+            console.log('this is the fetched response', responseObject)
+        })
+    }
+
 
     
 }

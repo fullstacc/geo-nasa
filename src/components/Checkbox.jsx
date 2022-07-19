@@ -1,5 +1,7 @@
 import React, {useState} from 'react'; 
 import {useGeolocated} from "react-geolocated"
+import {dataFetcher} from '../utils/dataService'
+
 
 function Checkbox({name, handleEntityList}) { 
   // state for checkbox
@@ -52,8 +54,9 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
 // ADDED FOR ISS
 // TODO: Separate into its own module
 const getIssData = () => {
+  console.log('starting getIssData')
   const url = 'https://tle.ivanstanojevic.me/api/tle/25544'
-  dataFetcher(url, 'iss', handleDataFeed)
+  dataFetcher('iss', url, handleDataFeed)
 
 }
   
