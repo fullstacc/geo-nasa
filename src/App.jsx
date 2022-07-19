@@ -3,7 +3,7 @@ import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 import Banner from "./components/Banner";
 import Toolbar from "./components/Toolbar";
 import { useState } from "react";
-console.log('DID IT WORK', import.meta.env)
+// console.log('DID IT WORK', import.meta.env)
 
 const feedOptions = ["My Location", "International Space Station"];
 
@@ -35,16 +35,36 @@ function App() {
         <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
         <CustomDataSource>
         {entityList.map((x, i) => {
-          const x_pos = x.position[0]
-          const y_pos = x.position[1]
-          const acc = x.accuracy
+          if (x.name === 'My Location'){
+            console.log('parsing my location')
+
+            let x_pos = x.position[0]
+            let y_pos = x.position[1]
+            let acc = x.accuracy
+            let position = Cartesian3.fromDegrees(x_pos, y_pos, acc)
+            let point = {pixelSize: 15}
+            let description = x.description
+
+          } // end if
+          
+          else if (x.name === 'International Space Station') {
+              console.log('parsing the ISS', x)
+              let x_pos = x.longitude
+              let y_pos = x.latitude
+              let height = x.height
+              let position = Cartesian3.fromRadians(x_pos, y_pos, height)
+              console.log('this is the ISS position', position)
+              let point = {pixelSize: 15}
+              let description = x.description
+          }
+          
     return (
       <Entity
         name={x.name}
         key={i}
-        position={Cartesian3.fromDegrees(x_pos, y_pos, acc)}
-        point={{ pixelSize: 15 }}
-        description={x.description}
+        position={position}
+        point={point}
+        description={description}
       />
     )
   })}

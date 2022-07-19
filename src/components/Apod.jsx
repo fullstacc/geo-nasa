@@ -15,15 +15,10 @@ const Apod = () => {
     }
 
     useEffect(() => {
-        dataFetcher(apod_url, handleApod, apod);
-        // setApod({
-        //     date: responseObject.date,
-        //     explanation: responseObject.explanation,
-        //     hdurl: hdurl,
-        // })
+        dataFetcher(apod_url, 'apod', handleApod, apod);
+
       }, []);
 
-      //  {Object.entries(apod).map(([key, value]) => `key ${key} value ${value}`)}
 
     return (
         <div id="apod">
