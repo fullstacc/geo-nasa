@@ -6,12 +6,6 @@ function Checkbox({name, handleEntityList}) {
   const [checked, setChecked] = useState(false);
   
 
-  function getLongAndLat() {
-    return new Promise((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    );
-}
-
 const { coords, isGeolocationAvailable, isGeolocationEnabled } =
         useGeolocated({
             positionOptions: {
@@ -40,13 +34,6 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     } 
 }
 
-
-function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude + 
-    "Longitude: " + position.coords.longitude)
-    const myPosition = [position.coords.latitude, position.coords.longitude]
-    return myPosition
-}
   
   const handleChange = () => { 
     setChecked(!checked)

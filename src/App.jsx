@@ -16,6 +16,8 @@ function App() {
   // function to update list of displayed entities
   // the "status" here will come from the checkbox value
   const handleEntityList = (entity, status) => {
+    console.log('status within handleEntityList is ', status)
+    // in this case, status === false means that the item is not showing and we should add it to the entity list
     status ? setEntityList([]) : setEntityList(entityList.concat(entity))
   }
 
@@ -35,15 +37,19 @@ function App() {
         <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
         <CustomDataSource>
         {entityList.map((x, i) => {
+          console.log('mapping over entity list', x)
           const x_pos = x.position[0]
           const y_pos = x.position[1]
           const acc = x.accuracy
+          const position = Cartesian3.fromDegrees(x_pos, y_pos, acc)
+          const point = {pixelSize:15}
     return (
       <Entity
         name={x.name}
         key={i}
-        position={Cartesian3.fromDegrees(x_pos, y_pos, acc)}
-        point={{ pixelSize: 15 }}
+
+        position={position}
+        point={point}
         description={x.description}
       />
     )
