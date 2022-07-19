@@ -4,6 +4,10 @@ import {useGeolocated} from "react-geolocated"
 function Checkbox({name, handleEntityList}) { 
   // state for checkbox
   const [checked, setChecked] = useState(false);
+
+  // ADDED FOR ISS
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [dataFeed, setDataFeed] = useState(null)
   
 
 const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -34,10 +38,36 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     } 
 }
 
+ // ADDED FOR ISS
+ const handleDataFeed = (dataFeedObject) => {
+  setDataLoaded(true)
+  if(dataLoaded) {
+    console.log('data is loaded')
+    setDataFeed(dataFeedObject)
+    console.log('state is loaded', dataFeed)
+  }
+
+}
+
+// ADDED FOR ISS
+// TODO: Separate into its own module
+const getIssData = () => {
+  const url = 'https://tle.ivanstanojevic.me/api/tle/25544'
+  dataFetcher(url, 'iss', handleDataFeed)
+
+}
   
   const handleChange = () => { 
     setChecked(!checked)
-    getLocation()
+    if (name === 'My Location'){
+      getLocation()
+    }
+    if (name === 'International Space Station'){
+      getIssData()
+    }
+
+   
+    
 }
 
  

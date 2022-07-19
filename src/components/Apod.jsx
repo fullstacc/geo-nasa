@@ -15,7 +15,7 @@ const Apod = () => {
     }
 
     useEffect(() => {
-        dataFetcher(apod_url, handleApod, apod);
+        dataFetcher('apod', apod_url, handleApod, apod);
         // setApod({
         //     date: responseObject.date,
         //     explanation: responseObject.explanation,
