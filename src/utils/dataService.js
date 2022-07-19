@@ -38,6 +38,11 @@ const dataFetcher = (name, Url, stateUpdater, stateStatus) => {
                 satelliteId: response.data.satelliteId,
                 description: 'International Space Station'
             }
+            
+
+            // translate it into numbers resium can use to display an object
+            tleTranslate(responseObject)
+
             console.log('this is the fetched response', responseObject)
         })
     }
