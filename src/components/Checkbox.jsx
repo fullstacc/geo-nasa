@@ -47,6 +47,7 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     console.log('data is loaded')
     setDataFeed(dataFeedObject)
     console.log('state is loaded', dataFeed)
+    handleEntityList(dataFeed, false)
   }
 
 }
@@ -56,7 +57,7 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
 const getIssData = () => {
   console.log('starting getIssData')
   const url = 'https://tle.ivanstanojevic.me/api/tle/25544'
-  dataFetcher('iss', url, handleDataFeed)
+  dataFetcher('iss', url, handleDataFeed, dataFeed)
 
 }
   

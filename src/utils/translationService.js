@@ -30,6 +30,7 @@ const tleTranslate = (objectToTranslate) => {
       }
 
       console.log('this is the translated object: ', translatedObject )
+      return(translatedObject)
 
 }
 
