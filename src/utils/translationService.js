@@ -34,4 +34,10 @@ const tleTranslate = (objectToTranslate) => {
 
 }
 
+// use this when mapping the entityList and running into objects that are static positions on the map
+// i.e. 'my location'
+const staticPositionCesium = (objectToTranslate) => {
+
+}
+
 export {tleTranslate}

@@ -30,29 +30,61 @@ function App() {
   };
 
 
+  // {
+  //   // alternate version
+  //   entityList.map((x, i) => {
+  //     // if its a static position on the map, we parse the object differently
+  //     if (x.position.length === 2) {
+  //       console.log('this is a my position entity')
+  //     }
+  //   })
+  // }
+
+
   return (
     <div>
       <Viewer full>
         <Toolbar bannerVisible={bannerVisible} feedOptions={feedOptions} handleEntityList={handleEntityList}/>
         <Banner bannerVisible={bannerVisible} closeBanner={closeBanner} />
         <CustomDataSource>
-        {entityList.map((x, i) => {
-          console.log('mapping over entity list', x)
-          const x_pos = x.position[0]
-          const y_pos = x.position[1]
-          const acc = x.accuracy
-          const position = Cartesian3.fromDegrees(x_pos, y_pos, acc)
-          const point = {pixelSize:15}
-    return (
-      <Entity
-        name={x.name}
-        key={i}
+        
 
-        position={position}
-        point={point}
-        description={x.description}
-      />
-    )
+
+        {entityList.map((x, i) => {
+          if (x.type === 'static') {
+            console.log('playing with my location')
+            const position = x.position
+            const name = x.name
+            const description = x.description
+            const point = {pixelSize:15}
+            
+            return (
+              <Entity name={name} key={i} position={position} point={point} description={description}/>
+            )
+          }
+          else {
+            console.log('playing with iss')
+            const x_pos = x.longitude
+            const y_pos = x.latitude
+            const height = x.height 
+            const position = Cartesian3.fromRadians(x_pos, y_pos, height)
+            
+            
+          }
+          console.log('mapping over entity list', x)
+          
+          
+          
+          
+    // return (
+    //   <Entity
+    //     name={x.name}
+    //     key={i}
+    //     position={x.position}
+    //     point={point}
+    //     description={x.description}
+    //   />
+    // )
   })}
         </CustomDataSource>
       </Viewer>

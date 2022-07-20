@@ -42,8 +42,8 @@ const dataFetcher = (name, Url, stateUpdater, stateStatus) => {
 
             // translate it into numbers resium can use to display an object
             const translatedObject = (tleTranslate(responseObject))
+            console.log('this is the translated  object from within dataservice', translatedObject)
             stateUpdater(translatedObject)
-            // console.log('this is the fetched response', responseObject)
             console.log('testing loaded state from dataservice', stateStatus)
         })
     }

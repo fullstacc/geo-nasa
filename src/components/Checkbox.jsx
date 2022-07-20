@@ -1,6 +1,8 @@
 import React, {useState} from 'react'; 
 import {useGeolocated} from "react-geolocated"
 import {dataFetcher} from '../utils/dataService'
+import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
+
 
 
 function Checkbox({name, handleEntityList}) { 
@@ -32,9 +34,19 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
           description: 'Your position',
           accuracy: coords.accuracy
         }
+
+        // TEST
+        const revisedEntityObject = {
+           position : Cartesian3.fromDegrees(coords.longitude, coords.latitude, coords.accuracy),
+           description : 'Your position',
+           name : name,
+           type : 'static'
+
+            
+        }
         const status = checked
         console.log('sending to entitylist, status is' , status)
-        handleEntityList(entityObject, status)
+        handleEntityList(revisedEntityObject, status)
     } else {
         console.log("Geolocation is not supported by this browser.")
     } 
@@ -42,15 +54,19 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
 
  // ADDED FOR ISS
  const handleDataFeed = (dataFeedObject) => {
-  setDataLoaded(true)
-  if(dataLoaded) {
-    console.log('data is loaded')
+  if(!dataLoaded) {
     setDataFeed(dataFeedObject)
-    console.log('state is loaded', dataFeed)
-    handleEntityList(dataFeed, false)
+    setDataLoaded(!dataLoaded)
+    
   }
 
 }
+
+// ADDED FOR ISS
+if (dataLoaded) {
+  handleEntityList(dataFeed, false)
+}
+
 
 // ADDED FOR ISS
 // TODO: Separate into its own module
