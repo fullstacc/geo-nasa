@@ -1,16 +1,18 @@
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import {useGeolocated} from "react-geolocated"
+import {dataFetcher} from '../utils/dataService'
+import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
+
+
 
 function Checkbox({name, handleEntityList}) { 
   // state for checkbox
   const [checked, setChecked] = useState(false);
-  
 
-  function getLongAndLat() {
-    return new Promise((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    );
-}
+  // ADDED FOR ISS
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [dataFeed, setDataFeed] = useState(null)
+  
 
 const { coords, isGeolocationAvailable, isGeolocationEnabled } =
         useGeolocated({
@@ -32,25 +34,62 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
           description: 'Your position',
           accuracy: coords.accuracy
         }
+
+        // TEST
+        const revisedEntityObject = {
+           position : Cartesian3.fromDegrees(coords.longitude, coords.latitude, coords.accuracy),
+           description : 'Your position',
+           name : name,
+           type : 'static'
+
+            
+        }
         const status = checked
         console.log('sending to entitylist, status is' , status)
-        handleEntityList(entityObject, status)
+        handleEntityList(revisedEntityObject, status)
     } else {
         console.log("Geolocation is not supported by this browser.")
     } 
 }
 
+ // ADDED FOR ISS
+ const handleDataFeed = (dataFeedObject) => {
+  if(dataLoaded === false) {
+    setDataFeed(dataFeedObject)
+    setDataLoaded(true)
+  }
 
-function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude + 
-    "Longitude: " + position.coords.longitude)
-    const myPosition = [position.coords.latitude, position.coords.longitude]
-    return myPosition
+}
+
+// ADDED FOR ISS
+useEffect(() => {
+  if (dataLoaded) {
+    handleEntityList(dataFeed, false)
+  }
+}, [dataLoaded])
+
+
+
+// ADDED FOR ISS
+// TODO: Separate into its own module
+const getIssData = () => {
+  console.log('starting getIssData')
+  const url = 'https://tle.ivanstanojevic.me/api/tle/25544'
+  dataFetcher('iss', url, handleDataFeed, dataFeed)
+
 }
   
   const handleChange = () => { 
     setChecked(!checked)
-    getLocation()
+    if (name === 'My Location'){
+      getLocation()
+    }
+    if (name === 'International Space Station'){
+      getIssData()
+    }
+
+   
+    
 }
 
  
