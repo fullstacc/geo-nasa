@@ -1,5 +1,5 @@
 import { propagate, twoline2satrec, gstime, eciToGeodetic } from 'satellite.js';
-
+import { Cartesian3 } from 'cesium';
 
 
 // fetcher
@@ -18,15 +18,17 @@ const tleTranslate = (objectToTranslate) => {
     // position
     const position = eciToGeodetic(positionAndVelocity.position, gmst);
 
+    // const height = position.height * 1000
+    // const translatedPosition = Cartesian3(position.longitude, position.latitude, height)
+
     // this object contains the parameters necessary to display it in resium
     const translatedObject = {
         name: 'International Space Station',
-    
         longitude: position.longitude,
         latitude: position.latitude,
         height: position.height * 1000,
-        size: 5,
-        color: 'red'
+        size: 20,
+        type: 'satellite'
       }
 
       console.log('this is the translated object: ', translatedObject )

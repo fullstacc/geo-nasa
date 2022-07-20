@@ -2,7 +2,8 @@ import { Viewer, Entity, CustomDataSource } from "resium";
 import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 import Banner from "./components/Banner";
 import Toolbar from "./components/Toolbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {SampledPositionProperty} from "cesium"
 console.log('DID IT WORK', import.meta.env)
 
 const feedOptions = ["My Location", "International Space Station"];
@@ -11,7 +12,9 @@ function App() {
   const [bannerVisible, setBannerVisible] = useState(true);
   const [entityList, setEntityList] = useState([]);
 
-
+useEffect(()=> {
+  'entityList has changed'
+}, [entityList])
  
   // function to update list of displayed entities
   // the "status" here will come from the checkbox value
@@ -56,18 +59,27 @@ function App() {
             const position = x.position
             const name = x.name
             const description = x.description
-            const point = {pixelSize:15}
+            const point = {pixelSize:50}
             
             return (
               <Entity name={name} key={i} position={position} point={point} description={description}/>
             )
           }
-          else {
+          if (x.type === 'satellite') {
             console.log('playing with iss')
-            const x_pos = x.longitude
-            const y_pos = x.latitude
+            // const position = x.position
+            const position = Cartesian3.fromRadians(x.longitude, x.latitude, x.height)
+            const name = x.name
+            const description = x.description
             const height = x.height 
-            const position = Cartesian3.fromRadians(x_pos, y_pos, height)
+            const point = {pixelSize:50}
+
+            const positionsOverTime = new SampledPositionProperty();
+            
+
+            return (
+              <Entity name={name} key={i} position={position} point={point} description={description}/>
+            )
             
             
           }

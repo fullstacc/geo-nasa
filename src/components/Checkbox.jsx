@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import {useGeolocated} from "react-geolocated"
 import {dataFetcher} from '../utils/dataService'
 import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
@@ -54,18 +54,20 @@ const { coords, isGeolocationAvailable, isGeolocationEnabled } =
 
  // ADDED FOR ISS
  const handleDataFeed = (dataFeedObject) => {
-  if(!dataLoaded) {
+  if(dataLoaded === false) {
     setDataFeed(dataFeedObject)
-    setDataLoaded(!dataLoaded)
-    
+    setDataLoaded(true)
   }
 
 }
 
 // ADDED FOR ISS
-if (dataLoaded) {
-  handleEntityList(dataFeed, false)
-}
+useEffect(() => {
+  if (dataLoaded) {
+    handleEntityList(dataFeed, false)
+  }
+}, [dataLoaded])
+
 
 
 // ADDED FOR ISS
