@@ -59,7 +59,7 @@ useEffect(()=> {
             const position = x.position
             const name = x.name
             const description = x.description
-            const point = {pixelSize:50}
+            const point = {pixelSize:10}
             
             return (
               <Entity name={name} key={i} position={position} point={point} description={description}/>
@@ -72,7 +72,7 @@ useEffect(()=> {
             const name = x.name
             const description = x.description
             const height = x.height 
-            const point = {pixelSize:50}
+            const point = {pixelSize:10}
 
             const positionsOverTime = new SampledPositionProperty();
             
