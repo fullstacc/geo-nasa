@@ -27,7 +27,7 @@ const tleTranslate = (objectToTranslate) => {
         longitude: position.longitude,
         latitude: position.latitude,
         height: position.height * 1000,
-        size: 20,
+        size: 5,
         type: 'satellite'
       }
 
