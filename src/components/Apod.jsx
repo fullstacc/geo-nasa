@@ -1,4 +1,4 @@
-import {dataFetcher} from '../utils/dataService'
+import dataFetcher from '../utils/dataService';
 import {useEffect, useState} from 'react'
 
 const Apod = () => {

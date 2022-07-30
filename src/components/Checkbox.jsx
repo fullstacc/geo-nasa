@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'; 
 import {useGeolocated} from "react-geolocated"
-import {dataFetcher} from '../utils/dataService'
+import dataFetcher from '../utils/dataService';
 import { Cartesian3, InfoBox, InfoBoxViewModel } from "cesium";
 
 
