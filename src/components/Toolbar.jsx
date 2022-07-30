@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Checkbox } from './Checkbox';
+import Checkbox from './Checkbox';
 
     const Toolbar = ({bannerVisible, feedOptions, handleEntityList}) => {
     if (!bannerVisible) {
