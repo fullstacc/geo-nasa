@@ -1,6 +1,5 @@
-
-let NASA_KEY = process.env.NASA_KEY
+const { NASA_KEY } = process.env;
 
 module.exports = {
-  NASA_KEY
-}
+  NASA_KEY,
+};
