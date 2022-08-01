@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/function-component-definition */
 import { useEffect, useState } from 'react';
 import dataFetcher from '../utils/dataService';
 
-const Apod = () => {
+function Apod() {
   // APOD target
   const apodUrl = 'https://api.nasa.gov/planetary/apod?';
   const [apod, setApod] = useState(null);
@@ -23,15 +20,22 @@ const Apod = () => {
   return (
     <div id="apod">
       <h1>NASA Astronomy Photo of the Day </h1>
-      <h2>{dataLoaded ? (apod.date) : null} : {dataLoaded ? (apod.title) : null} </h2>
-      <b> Credit : {dataLoaded ? (apod.copyright) : null}</b>
+      <h2>
+        {dataLoaded ? (apod.date) : null}
+        :
+        {dataLoaded ? (apod.title) : null}
+      </h2>
+      <b>
+        Credit:
+        {dataLoaded ? (apod.copyright) : null}
+      </b>
       <img id="apod-img" src={dataLoaded ? (apod.hdurl) : null} />
       <p>
         <i>{dataLoaded ? (apod.explanation) : null}</i>
       </p>
     </div>
   );
-};
+}
 
 export default Apod;
 
