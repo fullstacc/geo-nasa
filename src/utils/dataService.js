@@ -21,7 +21,6 @@ const dataFetcher = (name, Url, stateUpdater) => {
         })
         .catch((e) => console.log(e));
     }
-
     if (name === 'iss') {
         const targetUrl = Url;
 
