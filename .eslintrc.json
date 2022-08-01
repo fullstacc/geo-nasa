@@ -19,6 +19,7 @@
     ],
     "rules": {
         "react/prop-types": "off",
-        "consistent-return":"warn"
+        "consistent-return":"warn",
+        "react/react-in-jsx-scope": "off"
     }
 }

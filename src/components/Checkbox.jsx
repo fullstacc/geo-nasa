@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {useGeolocated} from "react-geolocated"
-import { Cartesian3, InfoBox, InfoBoxViewModel } from 'cesium';
+import React, { useState, useEffect } from 'react';
+import { useGeolocated } from 'react-geolocated';
+import { Cartesian3 } from 'cesium';
 import dataFetcher from '../utils/dataService';
 
-function Checkbox({name, handleEntityList}) {
+function Checkbox({ name, handleEntityList }) {
   // state for checkbox
   const [checked, setChecked] = useState(false);
 
@@ -11,13 +11,12 @@ function Checkbox({name, handleEntityList}) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [dataFeed, setDataFeed] = useState(null);
 
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-        useGeolocated({
-          positionOptions: {
-            enableHighAccuracy: false,
-          },
-          userDecisionTimeout: 5000,
-        });
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  });
 
   const getLocation = () => {
     if (isGeolocationEnabled && isGeolocationAvailable) {
@@ -28,11 +27,11 @@ function Checkbox({name, handleEntityList}) {
         type: 'static',
       };
       const status = checked;
-      handleEntityList(revisedEntityObject, status)
+      handleEntityList(revisedEntityObject, status);
     } else {
-      console.log('Geolocation is not supported by this browser.')
+      console.log('Geolocation is not supported by this browser.');
     }
-  }
+  };
 
   // ADDED FOR ISS
   const handleDataFeed = (dataFeedObject) => {
@@ -55,7 +54,7 @@ function Checkbox({name, handleEntityList}) {
     console.log('starting getIssData');
     const url = 'https://tle.ivanstanojevic.me/api/tle/25544';
     dataFetcher('iss', url, handleDataFeed, dataFeed);
-  }
+  };
 
   const handleChange = () => {
     setChecked(!checked);
