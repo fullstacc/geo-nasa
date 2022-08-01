@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import axios from 'axios';
-import { tleTranslate } from './translationService';
+import tleTranslate from './translationService';
 
 // fetcher
 const dataFetcher = (name, Url, stateUpdater) => {
